@@ -1,0 +1,7 @@
+framework module mesibo {
+ umbrella header "Mesibo.h"
+
+ module * { export * }
+
+ export *
+}
