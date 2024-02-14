@@ -189,6 +189,10 @@
 @property (nonatomic) BOOL holdOnCellularIncoming;
 @property (nonatomic) BOOL checkNetworkConnection;
 
+@property (nonatomic) NSURL * _Nullable inCallRingSound;
+@property (nonatomic) NSURL * _Nullable inCallBusySound;
+
+
 @property (nonatomic) NSMutableArray * _Nullable iceServers;
 
 @property (nonatomic) BOOL enableCallKit; // requires CallKit to be enabled first

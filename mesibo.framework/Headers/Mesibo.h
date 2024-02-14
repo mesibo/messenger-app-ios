@@ -71,6 +71,7 @@
 #define MESIBO_MSGSTATUS_DATETIME        0x24
 #define MESIBO_MSGSTATUS_HEADER          0x25
 #define MESIBO_MSGSTATUS_INVISIBLE       0x26
+#define MESIBO_MSGSTATUS_EMPTY           0x27
 
 // ONLY FOR UI USAGE
 #define MESIBO_MSGSTATUS_TIMESTAMP      0x30
@@ -406,6 +407,21 @@
 @property (nonatomic) BOOL possiblyValid;
 @end
 
+@interface MesiboContactSynchronizer : NSObject
++(BOOL) isAutoSyncEnabled;
++(void) enableAutoSync:(BOOL) enable;
+
+-(void) subscribe:(BOOL)subscribe;
+-(void) setContact:(BOOL)contact __deprecated_msg("Use setProfileAccessLevels(levels) instead.");
+-(BOOL) setProfileAccessLevels:(NSArray<NSNumber *> * _Nullable) profileAccessLevels;
+
+-(void) sync:(NSArray<NSString *> * _Nonnull)addresses syncNow:(BOOL)syncNow;
+-(void) sync:(NSArray<NSString *> * _Nonnull)addresses;
+-(void) syncAsUpdate:(NSArray<NSString *> * _Nonnull)addresses syncNow:(BOOL)syncNow;
+-(void) syncAsUpdate:(NSArray<NSString *> * _Nonnull)addresses;
+-(void) syncNow;
+@end
+
 @protocol MesiboPhoneContactsListener <NSObject>
 -(BOOL) Mesibo_onPhoneContactsChanged  NS_SWIFT_NAME(Mesibo_onPhoneContactsChanged());
 -(BOOL) Mesibo_onPhoneContactsAdded:(NSArray<NSString *> * _Nonnull) phones  NS_SWIFT_NAME(Mesibo_onPhoneContactsAdded(phones:));
@@ -414,7 +430,7 @@
 
 @interface MesiboPhoneContactsManager : NSObject
 -(void) setListener:(id<MesiboPhoneContactsListener>  _Nonnull) listener;
--(void) setSyncConfig:(BOOL) addContact subscribe:(BOOL)subscribe visibility:(int) visibility;
+-(void) setSynchronizers:(MesiboContactSynchronizer * _Nullable) addSyncer deleteSyncer:(MesiboContactSynchronizer * _Nullable) deleteSyncer;
 -(void) syncMobileNumbers:(BOOL) enable;
 -(void) syncLandlineNumbers:(BOOL) enable;
 -(void) syncTollfreeNumbers:(BOOL) enable;
@@ -463,8 +479,27 @@
 -(UIImage * _Nullable) Mesibo_onGetProfileImage:(MesiboProfile * _Nonnull)profile NS_SWIFT_NAME(Mesibo_onGetProfileImage(profile:));
 @end
 
+@interface MesiboProfileImage : NSObject
+-(MesiboProfile * _Nullable) getProfile;
+-(int) getIndex;
+-(BOOL) isEmpty;
+-(UIImage * _Nullable) getImage;
+-(UIImage * _Nullable) getThumbnail;
+-(UIImage * _Nullable) getImageOrThumbnail;
+-(NSString * _Nullable) getUrl;
+-(NSString * _Nullable) getImagePath;
+-(NSString * _Nullable) getThumbnailPath;
+-(NSString * _Nullable) getImageOrThumbnailPath;
+-(MesiboProfileImage * _Nullable) getNext;
+-(MesiboProfileImage * _Nullable) getPrevious;
+@end
+
 @interface MesiboProfile : NSObject
 
++(MesiboProfile * _Nullable) get:(uint32_t)code;
+-(uint32_t) getHashCode;;
+
+-(void) reset;
 -(BOOL) isActive;
 
 -(void) favorite:(BOOL)enable;
@@ -535,32 +570,44 @@
 
 -(NSString * _Nullable) getAdmin ;
 
--(void) setName:(NSString * _Nonnull)val ;
--(void) setTemporaryName:(NSString * _Nullable)val;
--(void) setOverrideName:(NSString * _Nonnull)val ;
+-(void) setName:(NSString * _Nonnull)name ;
+-(void) setTemporaryName:(NSString * _Nullable)name;
+-(void) setOverrideName:(NSString * _Nonnull)name ;
 
 -(NSString * _Nullable) getName ;
 -(NSString * _Nonnull) getNameOrAddress;
 -(NSString * _Nullable) getFirstName ;
 -(NSString * _Nonnull) getFirstNameOrAddress;
--(void) setStatus:(NSString * _Nullable)val ;
--(NSString * _Nullable) getStatus ;
--(void) setInfo:(NSString * _Nullable)val ;
--(NSString * _Nullable) getInfo ;
--(void) setCustomProfile:(NSString * _Nullable)val ;
--(NSString * _Nullable) getCustomProfile ;
+
 -(void) setDraft:(NSString * _Nullable)val ;
 -(NSString * _Nullable) getDraft ;
 -(void) setUserData:(id _Nullable)val ;
 -(id _Nullable) getUserData ;
 
+-(void) setString:(NSString * _Nonnull) name value:(NSString * _Nullable) value;
+-(void) setLong:(NSString * _Nonnull) name value:(long) value;
+-(void) setInt:(NSString * _Nonnull) name value:(int) value;
+-(void) setDouble:(NSString * _Nonnull) name value:(double) value;
+-(void) setBoolean:(NSString * _Nonnull) name value:(BOOL) value;
 
--(void) setImageUrl:(NSString * _Nonnull) url ;
--(NSString * _Nullable) getImageUrl ;
--(UIImage * _Nullable) getImage ;
--(UIImage * _Nullable) getThumbnail ;
--(NSString * _Nullable) getImageOrThumbnailPath;
--(UIImage * _Nullable) getImageOrThumbnail;
+-(NSDictionary * _Nonnull) getValues;
+-(id _Nullable) getValue:(NSString * _Nonnull) name;
+-(NSString * _Nullable) getString:(NSString * _Nonnull) name defval:(NSString * _Nullable) defval;
+-(long) getLong:(NSString * _Nonnull) name defval:(long) defval;
+-(int) getInt:(NSString * _Nonnull) name defval:(int) defval;
+-(double) getDouble:(NSString * _Nonnull) name defval:(double) defval;
+-(BOOL) getBoolean:(NSString * _Nonnull) name defval:(BOOL) defval;
+
+-(BOOL) setImage:(UIImage * _Nullable)image index:(int)index;
+-(BOOL) setImage:(UIImage * _Nullable)image;
+-(BOOL) setImageFromFile:(NSString * _Nullable)path index:(int)index;
+-(BOOL) setImageFromFile:(NSString * _Nullable)path;
+-(BOOL) setImageUrl:(NSString * _Nonnull) url index:(int)index;
+-(BOOL) setImageUrl:(NSString * _Nonnull) url;
+
+-(MesiboProfileImage * _Nonnull) getImage:(int)index;
+-(MesiboProfileImage * _Nonnull) getImage;
+-(BOOL) prefetchImages;
 
 
 -(MesiboProfile * _Nonnull) cloneProfile;
@@ -570,35 +617,36 @@
 -(BOOL) addListener:(id<MesiboProfileDelegate> _Nonnull) delegate ;
 -(void) removeListener:(id<MesiboProfileDelegate> _Nonnull) delegate ;
 
--(void) setThumbnailProperties:(int)width height:(int)height quality:(int)quality ;
--(void) setImageProperties:(int)width height:(int)height quality:(int)quality ;
-
--(void) setImage:(UIImage * _Nullable)image;
--(BOOL) setImageFromFile:(NSString * _Nullable)path;
--(void) setTemporaryImage:(UIImage * _Nullable) image thumbnail:(UIImage * _Nullable) thumbnail;
-
--(NSString * _Nullable) getImagePath;
++(void) setThumbnailProperties:(uint16_t)width height:(uint16_t)height maxside:(uint16_t)maxside maxpixels:(uint32_t)maxpixels;
++(void) setImageProperties:(uint16_t)width height:(uint16_t)height maxside:(uint16_t)maxside maxpixels:(uint32_t)maxpixels;
 
 -(BOOL) isContact;
 -(BOOL) isSubscribed;
--(void) setContact:(BOOL) enable visiblity:(int) visibility ;
--(void) setContact:(BOOL) enable;
+-(void) setContact:(BOOL) enable __deprecated_msg("Use setProfileAccessLevels(levels) instead.");
 -(void) subscribe:(BOOL) enable;
+-(void) setProfileAccessLevels:(NSArray * _Nullable) levels;
 
--(uint32_t) getLocalFields;
 -(void) removeLocalProfile;
 -(void) removeSyncedProfile;
 -(void) remove;
+-(void) reload;
 
 -(void) sendTyping;
 -(void) sendJoined;
 -(void) sendLeft;
 
+-(void) broadcastChanges;
+-(BOOL) publish;
 -(BOOL) save;
 
 -(MesiboGroupProfile * _Nullable) getGroupProfile;
 
--(BOOL)deleteMessages:(uint64_t)ts;
+-(BOOL) deleteMessages:(uint64_t)ts;
+-(BOOL) deleteMessages;
+-(BOOL) deleteMessagesOlderThan:(uint32_t) seconds;
+-(BOOL) clearMessages:(uint64_t)ts;
+-(BOOL) clearMessages;
+
 -(MesiboReadSession * _Nonnull) createReadSession:(id _Nullable) delegate;
 -(MesiboMessage * _Nonnull) newMessage;
 -(MesiboPresence * _Nonnull) newPresence;
@@ -662,14 +710,25 @@
 @end
 
 @interface MesiboSelfProfile : MesiboProfile
--(void) setVisibility:(int) visibility;
+-(void) setVisibility:(int) visibility __deprecated_msg("Use setAccessLevel(name, level) instead.");
 -(void) setSyncType:(int)type;
+-(void) setAccessLevel:(NSString * _Nonnull)name level:(int)level;
+-(void) resetAccessLevels;
+-(void) setString:(NSString * _Nonnull)name value:(NSString * _Nonnull)value level:(int)level;
+-(void) setLong:(NSString * _Nonnull)name value:(long)value level:(int)level;
+-(void) setInt:(NSString * _Nonnull)name value:(int)value level:(int)level;
+-(void) setDouble:(NSString * _Nonnull)name value:(double)value level:(int)level;
+-(void) setBoolean:(NSString * _Nonnull)name value:(BOOL)value level:(int)level;
+-(BOOL) setImage:(UIImage * _Nullable)image index:(int)index level:(int)level;
+-(BOOL) setImageFromFile:(NSString * _Nullable)path index:(int)index level:(int)level;
+-(BOOL) setImageUrl:(NSString * _Nullable)url index:(int)index level:(int)level;
 @end
 
 @protocol MesiboProfileDelegate <NSObject>
 @required
 -(void) MesiboProfile_onUpdate:(MesiboProfile * _Nonnull)profile NS_SWIFT_NAME(MesiboProfile_onUpdate(profile:));
 -(void) MesiboProfile_onEndToEndEncryption:(MesiboProfile * _Nonnull)profile status:(int) status NS_SWIFT_NAME(MesiboProfile_onEndToEndEncryption(profile:status:));
+-(void) MesiboProfile_onPublish:(MesiboProfile * _Nonnull)profile result:(BOOL)result  NS_SWIFT_NAME(MesiboProfile_onPublish(profile:result:));
 @end
 
 @interface MesiboDateTime : NSObject
@@ -680,6 +739,7 @@
 @property (nonatomic) int hour;
 @property (nonatomic) int min;
 @property (nonatomic) int sec;
+@property (nonatomic) int wday;
 
 +(BOOL) isMonthFirstDateFormat;
 +(BOOL) is24HourTimeFormat;
@@ -706,6 +766,7 @@
 @property (nonatomic, nullable) NSString * peer;
 @property (nonatomic) uint64_t mid;
 @property (nonatomic) uint64_t refid;
+@property (nonatomic) uint64_t rsid;
 @property (nonatomic) uint64_t ts;
 @property (nonatomic) int expiry;
 @property (nonatomic) uint32_t groupid;
@@ -726,13 +787,18 @@
 -(nullable MesiboProfile *) getCurrentStatusSender;
 -(int) getCurrentStatus;
 
+-(uint64_t) getMessageId;
+-(void) setMessageId:(uint32_t) mid;
+-(uint64_t) getFlags __deprecated_msg("This function is for internal use only. It can change anytime and you should not use it.");
 -(int) getStatus;
 -(void) setStatus:(int)status;
 -(int) getExpiry;
 -(void) setExpiry:(int)expiry;
 -(int) getType;
 -(void) setType:(int)type;
+-(int) getOrigin;
 -(void) setFlag:(uint64_t) flag;
+-(void) setInReplyToMessage:(MesiboMessage * _Nonnull) message;
 -(void) setInReplyTo:(uint64_t) messageid;
 -(uint64_t) getInReplyTo;
 -(BOOL) isReply;
@@ -801,6 +867,10 @@
 -(BOOL) isMessage;
 
 -(BOOL) isDestinedFor:(MesiboProfile * _Nonnull) profile;
+-(MesiboProfile * _Nullable) getProfile;
+-(MesiboProfile * _Nullable) getPeerProfile;
+-(MesiboProfile * _Nullable) getSenderProfile;
+-(MesiboGroupProfile * _Nullable) getGroupProfile;
 
 -(void) setAge:(uint32_t) age;
 -(void) setAgeAfterDelivered:(uint32_t) age;
@@ -823,6 +893,8 @@
 -(MesiboDateTime * _Nonnull) getTimestamp;
 -(MesiboDateTime * _Nullable) getReadTimestamp:(NSString * _Nullable) peer;
 -(MesiboDateTime * _Nullable) getDeliveryTimestamp:(NSString * _Nullable) peer;
+
+-(MesiboReadSession * _Nullable) getReadSession;
 
 @end
 
@@ -868,6 +940,7 @@ typedef MesiboProfile MesiboAddress;
 @property (nonatomic) uint64_t size;
 @property (nonatomic) int progress;
 @property (nonatomic) int source;
+@property (nonatomic, nullable) id object;
 @property (nonatomic, nullable) id asset;
 @property (nonatomic, nullable) NSString *localIdentifier;
 @end
@@ -880,6 +953,7 @@ typedef MesiboProfile MesiboAddress;
 @property (nonatomic) uint64_t ts;
 @property (nonatomic) int origin;
 @property (nonatomic) int source;
+@property (nonatomic) int imageIndex;
 @property (nonatomic) BOOL secure; 
 @property (nonatomic) BOOL externalLink;
 @property (nonatomic) BOOL result;
@@ -888,6 +962,7 @@ typedef MesiboProfile MesiboAddress;
 
 -(NSString * _Nonnull) getPath;
 -(NSString * _Nullable) getUrl;
+-(id _Nullable) getUserObject;
 -(NSString * _Nullable) getLocalIdentifier;
 -(id _Nullable) getPHAsset;
 -(void) start:(NSString * _Nullable)url post:(NSDictionary * _Nullable)post;
@@ -961,7 +1036,6 @@ typedef MesiboProfile MesiboAddress;
 -(BOOL) hasLeft;
 @end
 
-// For internal use only - will be for public use from v2.0
 @interface MesiboMessage : MesiboMessageProperties
 @property (nonatomic, nullable) NSData *data;
 @property (nonatomic, nullable) NSString *title;
@@ -1067,6 +1141,9 @@ typedef MesiboProfile MesiboAddress;
 -(void) setForwarded:(NSArray<NSNumber *> * _Nonnull) fids;
 -(void) setForwardedMid:(uint64_t) fid;
 -(MesiboMessage * _Nonnull) forward:(MesiboProfile * _Nonnull) profile;
+-(MesiboMessage * _Nonnull) reply;
+-(MesiboMessage * _Nonnull) replyToPeer;
+
 -(int) save;
 -(BOOL) delete;
 -(BOOL) wipe;
@@ -1098,8 +1175,11 @@ typedef MesiboProfile MesiboAddress;
 
 
 @interface MesiboReadSession : NSObject
-- (id _Nonnull)initWith:(MesiboProfile * _Nonnull)profile listener:(id _Nullable) listener;
-- (id _Nonnull)initWith:(id _Nullable) listener;
++(MesiboReadSession * _Nullable) getSession:(uint64_t)sessionid;
++(MesiboReadSession * _Nonnull) createReadSummarySession:(id _Nonnull) listener;
++(MesiboReadSession * _Nonnull) createReadSession:(id _Nonnull) listener;
+
+- (uint64_t) getSession;
 
 +(void)endAllSessions;
 
@@ -1119,6 +1199,9 @@ typedef MesiboProfile MesiboAddress;
 -(void) setThreadId:(uint64_t) tid;
 -(void) setQuery:(NSString * _Nullable) query;
 
+-(BOOL) isSummary;
+-(MesiboProfile * _Nullable) getProfile;
+
 -(int) getMessageCount:(int) status;
 -(int) getTotalMessageCount;
 -(int) getSentMessageCount;
@@ -1126,7 +1209,6 @@ typedef MesiboProfile MesiboAddress;
 -(int) getUnreadMessageCount;
 -(int) getFailedMessageCount;
 -(void) enableReadReceipt:(BOOL) enable ;
--(void) enableSummary:(BOOL) enable ;
 -(void) enableFifo:(BOOL) enable ;
 -(void) enableFiles:(BOOL) enable ;
 -(void) enableThreads:(BOOL) enable;
@@ -1135,6 +1217,8 @@ typedef MesiboProfile MesiboAddress;
 -(void) enableIncomingCalls:(BOOL) enable ;
 -(void) enableOutgoingCalls:(BOOL) enable ;
 -(void) enableCalls:(BOOL) enable ;
+
+-(void) enableFlagInternalUseOnly:(int)flag enable:(BOOL)enable __deprecated_msg("This function is for internal use only. Use other enable* functions.");
 
 @end
 
@@ -1277,7 +1361,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 
 -(void) Mesibo_onConnectionStatus:(NSInteger) status NS_SWIFT_NAME(Mesibo_onConnectionStatus(status:));
 
--(void) Mesibo_onSync:(NSInteger)count NS_SWIFT_NAME(Mesibo_onSync(count:));
+-(void) Mesibo_onSync:(MesiboReadSession * _Nonnull)readSession count:(NSInteger)count NS_SWIFT_NAME(Mesibo_onSync(readSession:count:));
 
 -(BOOL) Mesibo_onCall:(uint32_t)peerid callid:(uint32_t)callid profile:(MesiboProfile * _Nonnull)profile flags:(uint64_t)flags;
 
@@ -1367,7 +1451,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 //-(void) didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void (^)(void))completion;
 
 //********************** Database **********************************************
--(BOOL) setDatabase:(nullable NSString *)name resetTables:(uint32_t)resetTables __deprecated_msg("Use setDatabase(name) instead.");;
+-(BOOL) setDatabase:(nullable NSString *)name resetTables:(uint32_t)resetTables __deprecated_msg("Use setDatabase(name) instead.");
 -(BOOL) setDatabase:(nullable NSString *)name;
 -(void) resetDatabase:(uint32_t) tables;
 -(NSString * _Nonnull) getDatabasePath;
@@ -1428,6 +1512,8 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(BOOL) deleteMessages:(uint64_t * _Nonnull)msgids count:(int)count;
 -(BOOL) deleteMessage:(uint64_t)msgid remote:(BOOL)remote;
 -(BOOL) deleteMessage:(uint64_t)msgid;
+-(BOOL) deleteMessages:(uint64_t) ts;
+-(BOOL) deleteMessagesOlderThan:(uint32_t) seconds;
 
 -(BOOL) deleteZombieMessages:(BOOL) groupOnly;
 //-(void)setEnableReadReceipt:(BOOL)enable sendLastReceipt:(BOOL)sendLastReceipt;
@@ -1457,14 +1543,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 
 -(MesiboProfile * _Nonnull) getSelfProfile;
 
--(BOOL) isAutoSyncContactsEnabled;
--(void) enableAutoSyncContacts:(BOOL) enabled;
 
--(void) syncContacts:(NSArray<NSString *> * _Nonnull)addresses addContact:(BOOL)addContact subscribe:(BOOL)subscribe visibility:(int)visibility syncNow:(BOOL) syncNow;
--(void) syncContact:(NSString * _Nonnull)address addContact:(BOOL)addContact subscribe:(BOOL)subscribe visibility:(int)visibility syncNow:(BOOL) syncNow;
--(void) syncContacts;
--(void) syncAndUpdateContacts:(NSArray<NSString *> * _Nonnull)addresses addContact:(BOOL)addContact subscribe:(BOOL)subscribe visibility:(int)visibility syncNow:(BOOL) syncNow;
--(void) syncAndUpdateContact:(NSString * _Nonnull)address addContact:(BOOL)addContact subscribe:(BOOL)subscribe visibility:(int)visibility syncNow:(BOOL) syncNow;
 
 -(BOOL) createGroup:(NSString * _Nonnull)name flags:(uint32_t) flags listener:(id _Nullable)listener;
 -(BOOL) createGroup:(MesiboGroupSettings * _Nonnull)settings listener:(id _Nullable)listener;
@@ -1513,11 +1592,13 @@ typedef void (^Mesibo_onRunHandler)(void);
 //-(NSString *)fetch:(NSString *)url post:(NSDictionary *)post filePath:(NSString *)filePath fileField:(NSString*)fileField;
 #endif
 
+//********************** Location Functions *********************************************
+-(BOOL) startLocationTracking:(float)distance interval:(int)interval always:(BOOL)always;
+-(void) stopLocationTracking;
+
 //********************** UI Functions *********************************************
--(BOOL) setMessageWidthInPercent:(int) percent;
--(int) getMessageWidthInPoints;
-
-
+//-(BOOL) setMessageWidthInPercent:(int) percent;
+//-(int) getMessageWidthInPoints;
 
 
 + (void) Log:(const char* _Nullable)sourceFile lineNumber:(int)lineNumber format:(NSString* _Nonnull)format, ...;
