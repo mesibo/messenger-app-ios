@@ -165,8 +165,8 @@
             timestampString = "595945959.179222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
             landmarkName = "-setPushToken:"
             landmarkType = "7">
          </BreakpointContent>
@@ -182,8 +182,8 @@
             timestampString = "595945959.179557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "491"
-            endingLineNumber = "491"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "-sendAPNToken"
             landmarkType = "7">
          </BreakpointContent>
@@ -199,8 +199,8 @@
             timestampString = "595945959.179835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
             landmarkName = "-logout:parent:"
             landmarkType = "7">
          </BreakpointContent>

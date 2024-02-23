@@ -590,6 +590,7 @@
 -(void) setDouble:(NSString * _Nonnull) name value:(double) value;
 -(void) setBoolean:(NSString * _Nonnull) name value:(BOOL) value;
 
+-(int) hasValue:(NSString * _Nonnull) name;
 -(NSDictionary * _Nonnull) getValues;
 -(id _Nullable) getValue:(NSString * _Nonnull) name;
 -(NSString * _Nullable) getString:(NSString * _Nonnull) name defval:(NSString * _Nullable) defval;
@@ -1419,7 +1420,6 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(void) setPushRegistryCompletion:(nullable void (^)(void))completion;
 -(uint32_t) getAccessTokenValidity;
 -(int) setBufferLen:(int)length empty:(BOOL)empty;
--(void) setSecureConnection:(BOOL) enable;
 -(void) setConfiuration:(uint32_t) type value:(uint32_t)value;
 -(void) setConfiuration:(uint32_t) type svalue:(nullable NSString *)svalue;
 //********************** Listner *********************************************

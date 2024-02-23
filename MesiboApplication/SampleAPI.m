@@ -144,9 +144,7 @@
     
     
     [self initAutoDownload];
-    
-    [MesiboInstance setSecureConnection:YES];
-    
+        
     // Uncomment to enable end-to-end encryption
     //[MesiboE2EEInstance enable:YES];
     
