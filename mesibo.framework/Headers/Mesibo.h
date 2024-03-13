@@ -166,11 +166,14 @@
 #define MESIBO_CONFIGTYPE_CALLANSTO             0x111
 #define MESIBO_CONFIGTYPE_CALLCONNECTTO         0x112
 
+
 #define MESIBO_VISIBILITY_NONE         0
 #define MESIBO_VISIBILITY_PUBLIC       1
+#if 0
 #define MESIBO_VISIBILITY_CONTACT      2
 #define MESIBO_VISIBILITY_CUSTOM       4
 #define MESIBO_VISIBILITY_LOCAL        8
+#endif
 
 #define MESIBO_SYNCTYPE_REALTIME               0
 #define MESIBO_SYNCTYPE_LAZY                   1
@@ -1451,7 +1454,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 //-(void) didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void (^)(void))completion;
 
 //********************** Database **********************************************
--(BOOL) setDatabase:(nullable NSString *)name resetTables:(uint32_t)resetTables __deprecated_msg("Use setDatabase(name) instead.");
+//-(BOOL) setDatabase:(nullable NSString *)name resetTables:(uint32_t)resetTables __deprecated_msg("Use setDatabase(name) instead.");
 -(BOOL) setDatabase:(nullable NSString *)name;
 -(void) resetDatabase:(uint32_t) tables;
 -(NSString * _Nonnull) getDatabasePath;
@@ -1559,7 +1562,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 
 //********************** Utility Functions *********************************************
 
--(uint32_t) random __deprecated_msg("Use getUniqueMessageId instead.");
+//-(uint32_t) random __deprecated_msg("Use getUniqueMessageId instead.");
 -(uint32_t) getUniqueMessageId;
 -(uint32_t) getSenderMessageId:(uint64_t)mid;
 

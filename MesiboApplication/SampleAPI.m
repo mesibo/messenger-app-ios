@@ -140,7 +140,7 @@
     [MesiboInstance setPath:appdir];
     
     [MesiboInstance setAccessToken:[SampleAPIInstance getToken]];
-    [MesiboInstance setDatabase:@"mesiboapp.db" resetTables:resetProfiles?MESIBO_DBTABLE_PROFILES:0]; //TBD, change this after testing
+    [MesiboInstance setDatabase:@"mesiboapp.db"]; 
     
     
     [self initAutoDownload];
