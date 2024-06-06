@@ -321,7 +321,10 @@
 @property (copy, nonatomic, nonnull) NSString *deleteForMeTitle;
 @property (copy, nonatomic, nonnull) NSString *deleteTitle;
 @property (copy, nonatomic, nonnull) NSString *deleteAlertTitle;
-@property (copy, nonatomic, nonnull) NSString *unreadTitle;
+@property (copy, nonatomic, nonnull) NSString *unreadCtxMenuTitle;
+@property (copy, nonatomic, nonnull) NSString *readCtxMenuTitle;
+@property (copy, nonatomic, nonnull) NSString *clearCtxMenuTitle;
+@property (copy, nonatomic, nonnull) NSString *deleteCtxMenuTitle;
 @property (copy, nonatomic, nonnull) NSString *clearMessagesTitle;
 @property (copy, nonatomic, nonnull) NSString *clearTitle;
 @property (copy, nonatomic, nonnull) NSString *clearAlertTitle;

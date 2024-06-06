@@ -169,6 +169,7 @@
 
 #define MESIBO_VISIBILITY_NONE         0
 #define MESIBO_VISIBILITY_PUBLIC       1
+#define MESIBO_VISIBILITY_SEARCHABLE      3
 #if 0
 #define MESIBO_VISIBILITY_CONTACT      2
 #define MESIBO_VISIBILITY_CUSTOM       4
@@ -322,6 +323,47 @@
 @class MesiboPresence;
 @class MesiboMessageProperties;
 @class MesiboProfile;
+@class MesiboSelfProfile;
+@class MesiboDateTime;
+@class MesiboLocationManager;
+@class MesiboProfileSearch;
+
+@interface MesiboLocationConfig : NSObject
+@property (nonatomic) uint32_t minDistance;
+@property (nonatomic) uint32_t minDistanceSharing;
+@property (nonatomic) uint32_t minInterval;
+@property (nonatomic) uint32_t maxInterval;
+@property (nonatomic) BOOL backgroundRefresh;
+@property (nonatomic) BOOL fineLocation;
+@property (nonatomic) BOOL aggressive;
+@end
+
+@interface MesiboLocation : NSObject
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
+@property (nonatomic) double altitude;
+@property (nonatomic) double speed;
+@property (nonatomic) double distance;
+@property (nonatomic) double accuracy;
+@property (nonatomic) uint64_t ts;
+@property (nonatomic) uint32_t flags;
+
+-(MesiboDateTime * _Nullable) getTimestamp;
+@end
+
+@interface MesiboProfileLocation : NSObject
+-(void) share:(uint32_t)duration minDistance:(uint32_t)minDistance sendRealLocation:(BOOL)sendRealLocation;
+-(void) share:(uint32_t)duration minDistance:(uint32_t)minDistance;
+-(void) share:(uint32_t)duration;
+-(void) endSharing;
+-(void) cancelSubscription;
+-(int) getSubscriptionStatus;
+ 
+-(MesiboLocation * _Nullable) subscribe:(uint32_t)duration maxDistance:(uint32_t)maxDistance;
+-(MesiboLocation * _Nullable) subscribe:(uint32_t)duration;
+-(MesiboLocation * _Nullable) get;
+@end
+
 
 @interface MesiboEndToEndEncryption : NSObject
 -(void) enable:(BOOL) enable;
@@ -345,7 +387,7 @@
 -(NSString * _Nonnull) getFingerprint:(NSString * _Nonnull) address;
 -(NSString * _Nonnull) getUserFingerprint:(NSString * _Nonnull) address;
 -(NSString * _Nonnull) getFingerprintPart:(NSString * _Nonnull) fingerprint part:(int) part;
--(int) setConfig:(int)level minopns:(uint32_t) minops maxops:(uint32_t) maxops;
+-(int) setConfig:(int)level minopns:(uint32_t) minops maxops:(uint32_t) maxops minDuration:(uint32_t) minDuration maxDuration:(uint32_t) maxDuration;
 
 @end
 
@@ -432,6 +474,7 @@
 @end
 
 @interface MesiboPhoneContactsManager : NSObject
++(MesiboPhoneContactsManager * _Nonnull) getInstance;
 -(void) setListener:(id<MesiboPhoneContactsListener>  _Nonnull) listener;
 -(void) setSynchronizers:(MesiboContactSynchronizer * _Nullable) addSyncer deleteSyncer:(MesiboContactSynchronizer * _Nullable) deleteSyncer;
 -(void) syncMobileNumbers:(BOOL) enable;
@@ -500,7 +543,11 @@
 @interface MesiboProfile : NSObject
 
 +(MesiboProfile * _Nullable) get:(uint32_t)code;
--(uint32_t) getHashCode;;
++(MesiboProfile * _Nonnull) getProfile:(NSString * _Nonnull) address;
++(MesiboProfile * _Nonnull) getGroupProfile:(uint32_t) groupid;
++(MesiboSelfProfile * _Nonnull) getSelfProfile;
+
+-(uint32_t) getHashCode;
 
 -(void) reset;
 -(BOOL) isActive;
@@ -617,6 +664,7 @@
 -(MesiboProfile * _Nonnull) cloneProfile;
 
 -(MesiboProfileEndToEndEncryption * _Nonnull) e2ee;
+-(MesiboProfileLocation * _Nonnull) location;
 
 -(BOOL) addListener:(id<MesiboProfileDelegate> _Nonnull) delegate ;
 -(void) removeListener:(id<MesiboProfileDelegate> _Nonnull) delegate ;
@@ -662,6 +710,8 @@
 -(int) getUnreadMessageCount;
 -(int) getFailedMessageCount;
 -(int) unread;
+-(int) markUnread;
+-(int) markRead:(BOOL) sendReadReceipt;
 
 -(int) subscribeTransient:(uint32_t)type activity:(uint32_t)activity duration:(uint32_t) duration;
 
@@ -715,6 +765,7 @@
 
 @interface MesiboSelfProfile : MesiboProfile
 -(void) setVisibility:(int) visibility __deprecated_msg("Use setAccessLevel(name, level) instead.");
+-(void) setSearchable:(BOOL) enable;
 -(void) setSyncType:(int)type;
 -(void) setAccessLevel:(NSString * _Nonnull)name level:(int)level;
 -(void) resetAccessLevels;
@@ -1427,7 +1478,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(void) setConfiuration:(uint32_t) type svalue:(nullable NSString *)svalue;
 //********************** Listner *********************************************
 //both are same functions, setDelegate is more common in iOS world
--(BOOL) setDelegate:(nonnull id)delegate;
+-(BOOL) setDelegate:(nonnull id)delegate __deprecated_msg("Use addListener instead.");;
 -(nullable id) getDelegates;
 -(BOOL) addListener:(nonnull id)delegate;
 -(BOOL) removeListner:(nonnull id)delegate;
@@ -1439,6 +1490,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(BOOL) isAccountSuspended;
 -(BOOL) isAccountPaid;
 -(int) getConnectionStatus;
+-(BOOL) isOnline;
 -(void)setNetwork:(int)connectivity;
 -(int) getDeviceType;
 -(uint32_t) getUid;
@@ -1448,6 +1500,8 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(nonnull MesiboEndToEndEncryption *) e2ee;
 
 -(nonnull MesiboPhoneContactsManager *) getPhoneContactsManager;
+-(nonnull MesiboLocationManager *) getLocationManager;
+
 
 //********************** Push Handler **************************************
 -(void) didReceiveRemoteNotification:(nullable NSDictionary *)userInfo fetchCompletionHandler:(nullable void (^)( UIBackgroundFetchResult))completionHandler;
@@ -1544,7 +1598,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(MesiboProfile * _Nullable) getUserProfileIfExists:(NSString * _Nonnull)peer;
 -(MesiboProfile * _Nullable) getGroupProfileIfExists:(uint32_t)groupid;
 
--(MesiboProfile * _Nonnull) getSelfProfile;
+-(MesiboSelfProfile * _Nonnull) getSelfProfile;
 
 
 
@@ -1595,9 +1649,6 @@ typedef void (^Mesibo_onRunHandler)(void);
 //-(NSString *)fetch:(NSString *)url post:(NSDictionary *)post filePath:(NSString *)filePath fileField:(NSString*)fileField;
 #endif
 
-//********************** Location Functions *********************************************
--(BOOL) startLocationTracking:(float)distance interval:(int)interval always:(BOOL)always;
--(void) stopLocationTracking;
 
 //********************** UI Functions *********************************************
 //-(BOOL) setMessageWidthInPercent:(int) percent;
@@ -1642,7 +1693,6 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(void) groupcall_admin:(uint16_t)o flags:(uint16_t)flags source:(uint32_t)source index:(uint16_t)index tuid:(uint32_t)tuid tsid:(uint32_t)tsid us:(uint32_t * _Nullable)us ss:(uint32_t * _Nullable)ss count:(int)count;
 -(void) groupcall_fyi:(uint32_t)sid source:(uint32_t)source status:(NSString * _Nullable)status;
 
--(void) logout_beta:(uint64_t) val;
 /*
  
  //+(NSString *)callstatusToString:(int) status;
@@ -1658,6 +1708,63 @@ typedef void (^Mesibo_onRunHandler)(void);
  -(int) getCharges:(float *)charge;
  */
 
+@end
+
+@protocol MesiboLocationListener <NSObject>
+-(void) Mesibo_onDeviceLocation:(MesiboLocation * _Nonnull) location NS_SWIFT_NAME(Mesibo_onDeviceLocation(location:));
+-(void) Mesibo_onLocationReceived:(MesiboProfile * _Nonnull)profile NS_SWIFT_NAME(Mesibo_onLocationReceived(profile:));
+-(void) Mesibo_onLocationRequest:(MesiboProfile * _Nonnull)profile duration:(uint32_t)duration  NS_SWIFT_NAME(Mesibo_onLocationRequest(profile:duration:));
+-(void) Mesibo_onLocationShared:(MesiboProfile * _Nonnull)profile duration:(uint32_t)duration  NS_SWIFT_NAME(Mesibo_onLocationRequest(profile:duration:));
+-(void) Mesibo_onLocationError:(MesiboProfile * _Nonnull)profile error:(int)error  NS_SWIFT_NAME(Mesibo_onLocationError(profile:error:));
+@end
+
+@protocol MesiboProfileSearchListener <NSObject>
+-(void) Mesibo_onProfileSearchResults:(NSArray<MesiboProfile *> * _Nonnull) profiles search:(MesiboProfileSearch * _Nonnull) search NS_SWIFT_NAME(Mesibo_onProfileSearchResults(profiles:search:));
+-(void) Mesibo_onProfileSearchUpdate:(NSArray<MesiboProfile *> * _Nonnull) profiles search:(MesiboProfileSearch * _Nonnull) search NS_SWIFT_NAME(Mesibo_onProfileSearchUpdate(profiles:search:));
+@end
+
+
+@interface MesiboProfileSearch : NSObject
+-(uint64_t) getRequestId;
+-(void) setListener:(id<MesiboProfileSearchListener> _Nonnull) listener;
+-(void) subscribe:(uint32_t)duration;
+-(void) enableGroupSearch:(BOOL)groupSearch;
+-(void) enableContactSearch:(BOOL) contactSearch;
+-(void) setLocation:(double)lat lon:(double)lon;
+-(void) setCurrentLocation;
+-(void) setDistance:(uint32_t)distance;
+-(void) setMaxAge:(uint32_t)age;
+-(BOOL) search;
+-(BOOL) searchMore;
+-(NSArray<MesiboProfile *> * _Nullable) getLastSearchResult;
+-(void) clearSearchResult;
+@end
+
+@interface MesiboLocationManager : NSObject
++(MesiboLocationManager * _Nonnull) getInstance;
+
+-(BOOL) start:(MesiboLocationConfig * _Nullable) config;
+-(BOOL) start;
+-(void) stop;
+-(BOOL) addListener:(id<MesiboLocationListener> _Nonnull) listener;
+-(void) removeListener:(id<MesiboLocationListener> _Nonnull) listener;
+
+-(BOOL) setLocation:(MesiboLocation * _Nonnull) location timeout:(uint32_t) timeout;
+-(BOOL) setLocation:(MesiboLocation * _Nonnull) location;
+-(BOOL) resetLocation;
+
+-(MesiboLocation * _Nullable) getDeviceLocation;
+-(MesiboLocation * _Nullable) getCustomLocation;
+-(MesiboLocation * _Nullable) getLocation;
+
+-(void) setAccessLevels:(NSArray<NSNumber *> * _Nullable) accessLevels;
+
+-(void) setSearchableDistance:(uint32_t) distance;
+
+-(void) startDistanceTracking:(uint32_t)duration;
+-(void) startDistanceTracking;
+-(void) stopDistanceTracking;
+-(double) getDistanceCovered;
 @end
 
 #ifdef MESIBO_NOLOGS
