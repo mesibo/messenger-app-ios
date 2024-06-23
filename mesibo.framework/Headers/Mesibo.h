@@ -1670,6 +1670,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(int) dtmf:(int)digit;
 -(int) hangup:(uint32_t)callid waiting:(BOOL)waiting;
 -(int) getMuteStatus;
+-(BOOL) setTurnCredentials:(NSString * _Nonnull) user password:(NSString * _Nonnull) password;
 -(void) setCallProcessing:(int)rejectStatus currentStatus:(int)currentStatus;
 -(void) setCallStatus:(int)type sdp:(NSString * _Nullable)sdp;
 -(void) setCallQueue:(id _Nullable)q;

@@ -32,5 +32,5 @@ typedef void (^LaunchMesiboBlock)();
 @property (strong, nonatomic) LaunchMesiboBlock mLaunchMesibo ;
 
 - (void) setLaunchMesiboCallback:(LaunchMesiboBlock) handler;
-- (void) setProfile:(MesiboProfile *) profile;
+- (void) setProfile:(MesiboSelfProfile *) profile;
 @end

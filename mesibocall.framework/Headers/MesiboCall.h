@@ -150,8 +150,19 @@
 @property (nonatomic) BOOL useMetalKit;
 @property (nonatomic) id _Nullable inProgressListener; // only a few listeners will be invoked
 @property (nonatomic) NSString * _Nullable callStatusText;
-
 @end
+
+@interface MesiboGroupCallUiProperties : NSObject
+@property (nonatomic) NSString * _Nullable exitPrompt;
+@property (nonatomic) NSString * _Nullable joinMessage;
+@property (nonatomic) NSString * _Nullable leftMessage;
+@property (nonatomic) BOOL screenSharingButton;
+@property (nonatomic) BOOL inviteButton;
+@property (nonatomic) BOOL participantsButton;
+@property (nonatomic) BOOL messageButton;
+@property (nonatomic) BOOL participantControls;
+@end
+
 
 @interface MesiboIceServer : NSObject
 @property (nonatomic) int type;
@@ -241,6 +252,7 @@
 
 -(void)setListener:(_Nullable id)listener;
 -(MesiboCallProperties *_Nullable) getCallProperties;
+
 
 -(void) start:(_Nullable id) controller listner:(_Nullable id) listener;
 -(void) answer:(BOOL) video;
@@ -376,6 +388,7 @@ typedef void (^MesiboPermissionBlock)(BOOL granted, BOOL existing);
 -(void) setDefaultUiParent:(id _Nonnull)parent;
 -(void) setDefaultUiProperties:(MesiboCallUiProperties * _Nullable)properties;
 -(MesiboCallUiProperties * _Nullable)getDefaultUiProperties;
+-(MesiboGroupCallUiProperties * _Nonnull) getDefaultGroupCallUiProperties;
 -(void) setDefaultUiTitle:(NSString * _Nonnull)name;
 -(NSString * _Nonnull) getDefaultUiTitle;
 
@@ -384,6 +397,8 @@ typedef void (^MesiboPermissionBlock)(BOOL granted, BOOL existing);
 
 -(BOOL) groupCallJoinRoomUi:(id _Nonnull)parent;
 -(BOOL) groupCallUi:(id _Nonnull)parent profile:(MesiboProfile * _Nonnull)profile video:(BOOL)video audio:(BOOL)audio videoMute:(BOOL)videoMute audioMute:(BOOL)audioMute publish:(BOOL)publish;
+
+-(BOOL) setTurnCredentials:(NSString * _Nonnull) user password:(NSString * _Nonnull) password;
 
 -(void) notify:(MesiboCallProperties * _Nonnull)cp;
 @end

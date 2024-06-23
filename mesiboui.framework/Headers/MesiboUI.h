@@ -335,6 +335,8 @@
 
 @property (assign, nonatomic) int verticalImageWidth;
 @property (assign, nonatomic) int horizontalImageWidth;
+@property (assign, nonatomic) int messageMarginForRichMessage;
+@property (assign, nonatomic) int messageMarginForTextMessage;
 
 @property (nonatomic) BOOL showAddressInProfileView;
 @property (nonatomic) BOOL showAddressAsPhoneInProfileView;

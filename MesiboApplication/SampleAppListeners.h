@@ -32,7 +32,7 @@
 #define SampleAppListenersInstance [SampleAppListeners getInstance]
 
 
-@interface SampleAppListeners : NSObject <MesiboDelegate, MesiboCallIncomingListener>
+@interface SampleAppListeners : NSObject <MesiboDelegate, MesiboCallIncomingListener, MesiboProfileCustomizationListener>
 
 +(SampleAppListeners *) getInstance;
 

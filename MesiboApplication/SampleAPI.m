@@ -150,6 +150,11 @@
     
     [MesiboInstance start];
     
+    MesiboLocationConfig *lc = [MesiboLocationConfig new];
+    lc.backgroundRefresh = NO;
+    
+    [[MesiboLocationManager getInstance] start:lc];
+    
 }
 
 -(NSString *) getSyncedContacts {

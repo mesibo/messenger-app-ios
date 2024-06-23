@@ -55,11 +55,11 @@
 
 
 @implementation EditProfileController {
-    MesiboProfile *mProfile;
+    MesiboSelfProfile *mProfile;
     UIImage *mImage;
 }
 
-- (void) setProfile:(MesiboProfile *) profile {
+- (void) setProfile:(MesiboSelfProfile *) profile {
     mProfile = profile;
 }
 
@@ -72,7 +72,7 @@
     
     mImage = nil;
     
-    if(!mProfile) mProfile = [MesiboInstance getSelfProfile];
+    if(!mProfile) mProfile = (MesiboSelfProfile *) [MesiboInstance getSelfProfile];
     
     _mPictureEditBtn.layer.cornerRadius = _mPictureEditBtn.layer.frame.size.width/2;
     _mPictureEditBtn.layer.masksToBounds = YES;
@@ -149,6 +149,7 @@
         
     }
     [mProfile setString:@"status" value:status];
+    [mProfile setSearchable:YES];
     [mProfile save];
     
     if(_mLaunchMesibo) {
