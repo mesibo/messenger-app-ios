@@ -153,7 +153,8 @@
     MesiboLocationConfig *lc = [MesiboLocationConfig new];
     lc.backgroundRefresh = NO;
     
-    [[MesiboLocationManager getInstance] start:lc];
+    // Uncomment to enable Location Tracking
+    //[[MesiboLocationManager getInstance] start:lc];
     
 }
 
