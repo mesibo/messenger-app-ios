@@ -1418,7 +1418,7 @@ typedef void (^Mesibo_onRunHandler)(void);
 
 -(void) Mesibo_onSync:(MesiboReadSession * _Nonnull)readSession count:(NSInteger)count NS_SWIFT_NAME(Mesibo_onSync(readSession:count:));
 
--(BOOL) Mesibo_onCall:(uint32_t)peerid callid:(uint32_t)callid profile:(MesiboProfile * _Nonnull)profile flags:(uint64_t)flags;
+-(BOOL) Mesibo_onCall:(uint32_t)peerid callid:(uint32_t)callid profile:(MesiboProfile * _Nonnull)profile flags:(uint64_t)flags ts:(uint64_t)ts;
 
 -(BOOL) Mesibo_onCallStatus:(uint32_t)peerid callid:(uint32_t)callid status:(int)status flags:(uint64_t)flags info:(uint64_t)info resolution:(uint64_t)resolution desc:(NSString * _Nullable)desc;
 

@@ -241,11 +241,11 @@
 @class MesiboCallInProgressListener;
 @class MesiboCallIncomingListener;
 
-@protocol MesiboCallIncomingListener
--(MesiboCallProperties * _Nullable) MesiboCall_OnIncoming:(MesiboProfile *_Nonnull)profile video:(BOOL)video waiting:(BOOL)waiting NS_SWIFT_NAME(MesiboCall_OnIncoming(profile:video:waiting:));
+@protocol MesiboCallIncomingListener <NSObject>
+-(MesiboCallProperties * _Nullable) MesiboCall_OnIncoming:(MesiboProfile * _Nonnull)profile video:(BOOL)video waiting:(BOOL)waiting NS_SWIFT_NAME(MesiboCall_OnIncoming(profile:video:waiting:));
 -(BOOL) MesiboCall_OnShowUserInterface:(id _Nullable )call properties:(MesiboCallProperties *_Nullable)cp NS_SWIFT_NAME(MesiboCall_OnShowUserInterface(call:properties:));
--(BOOL) MesiboCall_OnNotify:(int)type profile:(MesiboProfile *_Nonnull)profile video:(BOOL)video NS_SWIFT_NAME(MesiboCall_OnNotify(type:profile:video:));
--(void) MesiboCall_OnError:(MesiboCallProperties*_Nonnull)cp error:(int) error NS_SWIFT_NAME(MesiboCall_OnError(cp:error:));
+-(BOOL) MesiboCall_OnNotify:(int)type profile:(MesiboProfile * _Nonnull)profile video:(BOOL)video ts:(MesiboDateTime * _Nonnull)ts NS_SWIFT_NAME(MesiboCall_OnNotify(type:profile:video:ts:));
+-(void) MesiboCall_OnError:(MesiboCallProperties* _Nonnull)cp error:(int) error NS_SWIFT_NAME(MesiboCall_OnError(cp:error:));
 @end
 
 @interface MesiboCallApi : NSObject

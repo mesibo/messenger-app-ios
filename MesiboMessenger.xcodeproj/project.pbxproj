@@ -505,7 +505,7 @@
 				TargetAttributes = {
 					3EA48FA11E38998C00492966 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = HXKDD24ZQ6;
+						DevelopmentTeam = ZSLXDXHVW7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -758,7 +758,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MesiboApplication/MesiboApplication.entitlements;
-				DEVELOPMENT_TEAM = HXKDD24ZQ6;
+				DEVELOPMENT_TEAM = ZSLXDXHVW7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -789,7 +789,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MesiboApplication/MesiboApplication.entitlements;
-				DEVELOPMENT_TEAM = HXKDD24ZQ6;
+				DEVELOPMENT_TEAM = ZSLXDXHVW7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
