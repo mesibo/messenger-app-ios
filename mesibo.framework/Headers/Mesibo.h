@@ -95,6 +95,7 @@
 #define MESIBO_RESULT_OVERCAPACITY      0x86
 #define MESIBO_RESULT_RETRYLATER        0x87
 #define MESIBO_RESULT_E2EERROR          0x8A
+#define MESIBO_RESULT_RATELIMIT         0x8C
 
 #define MESIBO_RESULT_TIMEOUT           0xB0
 #define MESIBO_RESULT_CONNECTFAIL       0xB1
@@ -1483,10 +1484,11 @@ typedef void (^Mesibo_onRunHandler)(void);
 -(BOOL) addListener:(nonnull id)delegate;
 -(BOOL) removeListner:(nonnull id)delegate;
 
-//********************** Live Connection **************************************
+//********************** real-time connection **************************************
 -(int) start;
 -(int) stop;
 -(BOOL) reconnect:(int) inFocus;
+-(void) unreachable:(int)type duration:(uint32_t)duration;
 -(BOOL) isAccountSuspended;
 -(BOOL) isAccountPaid;
 -(int) getConnectionStatus;

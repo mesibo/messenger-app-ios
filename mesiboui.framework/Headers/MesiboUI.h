@@ -228,6 +228,7 @@
 
 @property (nonatomic) BOOL showRecentInForward;
 @property (nonatomic) BOOL mConvertSmilyToEmoji;
+@property (nonatomic) BOOL forceScrollToLatest;
 
 @property (assign, nonatomic, nullable) int *mLetterTitleColors;
 @property (assign, nonatomic) uint32_t mToolbarColor;
@@ -328,6 +329,9 @@
 @property (copy, nonatomic, nonnull) NSString *clearMessagesTitle;
 @property (copy, nonatomic, nonnull) NSString *clearTitle;
 @property (copy, nonatomic, nonnull) NSString *clearAlertTitle;
+
+@property (copy, nonatomic, nonnull) NSString *sendLimitReachedTitle;
+@property (copy, nonatomic, nonnull) NSString *sendLimitReached;
 
 @property (assign, nonatomic) int clearMessageMode;
 @property (assign, nonatomic) BOOL clearedMessageContactTimestamp;
