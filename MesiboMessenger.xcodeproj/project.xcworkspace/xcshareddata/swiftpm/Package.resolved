@@ -1,0 +1,15 @@
+{
+  "originHash" : "a817a8863ca9386df6eab8cf61151c53f2039d91beb39aadea0a84c0710f3a8a",
+  "pins" : [
+    {
+      "identity" : "mesibo-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mesibo/mesibo-ios-sdk",
+      "state" : {
+        "revision" : "44951fb7f91ecb7cc83b6d1b5840d9c92382894f",
+        "version" : "2.10.1"
+      }
+    }
+  ],
+  "version" : 3
+}
