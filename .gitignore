@@ -1,6 +1,43 @@
-.DS*
-MesiboMessenger.xcodeproj/project.xcworkspace/xcuserdata/*
-#WebRTC.framework/WebRTC
-split-webrtc.sh
+# ==========================================
+# System & General Files
+# ==========================================
+.DS_Store
+._*
+*.swp
+*.lock
+.gitignore
+
+# ==========================================
+# Xcode & iOS (Universal Rules)
+# ==========================================
+# Automatically ignores xcuserdata everywhere (root and subdirectories)
+xcuserdata/
+
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM/
+*.dSYM.zip
+
+# Playgrounds & Swift PM
+timeline.xctimeline
+playground.xcworkspace
+.swiftpm/xcode/xcuserdata/
+
+# ==========================================
+# Android & Gradle (Universal Rules)
+# ==========================================
+# Automatically ignores these folders anywhere they appear in the project
+.gradle/
+.idea/
+build/
+local.properties
+
+# ==========================================
+# Project Specific Exclusions
+# ==========================================
+old/
+upload.sh
+cleanup.sh
 
 
