@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mesibo/mesibo-ios-sdk",
       "state" : {
-        "revision" : "44951fb7f91ecb7cc83b6d1b5840d9c92382894f",
-        "version" : "2.10.1"
+        "revision" : "7f46d2da14f939da4f761a4b0049ecc96d338d1d",
+        "version" : "2.12.3"
       }
     }
   ],
