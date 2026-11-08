@@ -1,4 +1,4 @@
-# Mesibo Messenger for Flutter
+# Mesibo Messenger for iOS
 
 [Mesibo Messenger](https://mesibo.com) is an open-source real-time messaging, voice & video calling, and conferencing application. This repository contains the source code for the **Mesibo Messenger App for iOS (Objective-C)**.
 
