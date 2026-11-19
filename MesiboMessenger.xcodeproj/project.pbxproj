@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EB83B2751B4F4DC79BB1F67A /* mesibo in Frameworks */ = {isa = PBXBuildFile; productRef = 6D8C6E0626784A42ABA9AA46 /* mesibo */; };
+		3650CC1E6A7D4D4C90BE67AE /* MesiboUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3AA57C77AADF4A0F889787F4 /* MesiboUI */; };
+		EA9E71F309BB43F8A8A31985 /* MesiboCall in Frameworks */ = {isa = PBXBuildFile; productRef = 57C93038D6A14623983B5CA8 /* MesiboCall */; };
+		CD3FF9426E8042C583AC7E88 /* MesiboUIHelper in Frameworks */ = {isa = PBXBuildFile; productRef = ECBFD95E8F3B4F9B81FECE68 /* MesiboUIHelper */; };
+		3EA48FA71E38998C00492966 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA48FA61E38998C00492966 /* main.m */; };
+		3EA490091E389AA700492966 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EA48FEC1E389AA700492966 /* Assets.xcassets */; };
+		88392A9E309B010E0012D2F4 /* UIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A9D309B010E0012D2F4 /* UIManager.m */; };
+		88392AA0309B010E0012D2F4 /* UIListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A9B309B010E0012D2F4 /* UIListener.m */; };
+		88392AA1309B010E0012D2F4 /* BackupRestore.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A84309B010E0012D2F4 /* BackupRestore.m */; };
+		88392AA2309B010E0012D2F4 /* SampleAppListeners.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A90309B010E0012D2F4 /* SampleAppListeners.m */; };
+		88392AA3309B010E0012D2F4 /* SampleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A8C309B010E0012D2F4 /* SampleAPI.m */; };
+		88392AA4309B010E0012D2F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A82309B010E0012D2F4 /* AppDelegate.m */; };
+		88392AA6309B010E0012D2F4 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A96309B010E0012D2F4 /* AboutViewController.m */; };
+		88392AA7309B010E0012D2F4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A98309B010E0012D2F4 /* SettingsViewController.m */; };
+		88392AA8309B010E0012D2F4 /* CallListeners.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A87309B010E0012D2F4 /* CallListeners.m */; };
+		88392AA9309B010E0012D2F4 /* SampleAppFileTransferHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A8E309B010E0012D2F4 /* SampleAppFileTransferHandler.m */; };
+		88392AAA309B010E0012D2F4 /* SampleAppNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 88392A92309B010E0012D2F4 /* SampleAppNotify.m */; };
+		889963561E93BB7600FE21EB /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 889963551E93BB7600FE21EB /* appicon.png */; };
+		88B4F3291EBB617F0032E9F2 /* mesibo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88B4F3281EBB61690032E9F2 /* mesibo-Regular.otf */; };
+/* End PBXBuildFile section */
+
+
+
+/* Begin PBXFileReference section */
+		3EA48FA21E38998C00492966 /* MesiboMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MesiboMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EA48FA61E38998C00492966 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3EA48FB61E38998C00492966 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EA48FEC1E389AA700492966 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		881727101EAF56A100AB9B3C /* MesiboApplication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MesiboApplication.entitlements; sourceTree = "<group>"; };
+		88392A81309B010E0012D2F4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		88392A82309B010E0012D2F4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		88392A83309B010E0012D2F4 /* BackupRestore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackupRestore.h; sourceTree = "<group>"; };
+		88392A84309B010E0012D2F4 /* BackupRestore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupRestore.m; sourceTree = "<group>"; };
+		88392A86309B010E0012D2F4 /* CallListeners.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallListeners.h; sourceTree = "<group>"; };
+		88392A87309B010E0012D2F4 /* CallListeners.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallListeners.m; sourceTree = "<group>"; };
+		88392A88309B010E0012D2F4 /* Includes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Includes.h; sourceTree = "<group>"; };
+		88392A8B309B010E0012D2F4 /* SampleAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleAPI.h; sourceTree = "<group>"; };
+		88392A8C309B010E0012D2F4 /* SampleAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleAPI.m; sourceTree = "<group>"; };
+		88392A8D309B010E0012D2F4 /* SampleAppFileTransferHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleAppFileTransferHandler.h; sourceTree = "<group>"; };
+		88392A8E309B010E0012D2F4 /* SampleAppFileTransferHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleAppFileTransferHandler.m; sourceTree = "<group>"; };
+		88392A8F309B010E0012D2F4 /* SampleAppListeners.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleAppListeners.h; sourceTree = "<group>"; };
+		88392A90309B010E0012D2F4 /* SampleAppListeners.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleAppListeners.m; sourceTree = "<group>"; };
+		88392A91309B010E0012D2F4 /* SampleAppNotify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleAppNotify.h; sourceTree = "<group>"; };
+		88392A92309B010E0012D2F4 /* SampleAppNotify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleAppNotify.m; sourceTree = "<group>"; };
+		88392A95309B010E0012D2F4 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		88392A96309B010E0012D2F4 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		88392A97309B010E0012D2F4 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		88392A98309B010E0012D2F4 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		88392A9A309B010E0012D2F4 /* UIListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIListener.h; sourceTree = "<group>"; };
+		88392A9B309B010E0012D2F4 /* UIListener.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIListener.m; sourceTree = "<group>"; };
+		88392A9C309B010E0012D2F4 /* UIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIManager.h; sourceTree = "<group>"; };
+		88392A9D309B010E0012D2F4 /* UIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIManager.m; sourceTree = "<group>"; };
+		889963551E93BB7600FE21EB /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
+		88B4F3281EBB61690032E9F2 /* mesibo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mesibo-Regular.otf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3EA48F9F1E38998C00492966 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB83B2751B4F4DC79BB1F67A /* mesibo in Frameworks */,
+				3650CC1E6A7D4D4C90BE67AE /* MesiboUI in Frameworks */,
+				EA9E71F309BB43F8A8A31985 /* MesiboCall in Frameworks */,
+				CD3FF9426E8042C583AC7E88 /* MesiboUIHelper in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3EA48F991E38998C00492966 = {
+			isa = PBXGroup;
+			children = (
+				3EA48FA41E38998C00492966 /* MesiboApplication */,
+				3EA48FA31E38998C00492966 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3EA48FA31E38998C00492966 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EA48FA21E38998C00492966 /* MesiboMessenger.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EA48FA41E38998C00492966 /* MesiboApplication */ = {
+			isa = PBXGroup;
+			children = (
+				88392A81309B010E0012D2F4 /* AppDelegate.h */,
+				88392A82309B010E0012D2F4 /* AppDelegate.m */,
+				88392A83309B010E0012D2F4 /* BackupRestore.h */,
+				88392A84309B010E0012D2F4 /* BackupRestore.m */,
+				88392A85309B010E0012D2F4 /* Base.lproj */,
+				88392A86309B010E0012D2F4 /* CallListeners.h */,
+				88392A87309B010E0012D2F4 /* CallListeners.m */,
+				88392A88309B010E0012D2F4 /* Includes.h */,
+				88392A8B309B010E0012D2F4 /* SampleAPI.h */,
+				88392A8C309B010E0012D2F4 /* SampleAPI.m */,
+				88392A8D309B010E0012D2F4 /* SampleAppFileTransferHandler.h */,
+				88392A8E309B010E0012D2F4 /* SampleAppFileTransferHandler.m */,
+				88392A8F309B010E0012D2F4 /* SampleAppListeners.h */,
+				88392A90309B010E0012D2F4 /* SampleAppListeners.m */,
+				88392A91309B010E0012D2F4 /* SampleAppNotify.h */,
+				88392A92309B010E0012D2F4 /* SampleAppNotify.m */,
+				88392A99309B010E0012D2F4 /* Settings */,
+				88392A9A309B010E0012D2F4 /* UIListener.h */,
+				88392A9B309B010E0012D2F4 /* UIListener.m */,
+				88392A9C309B010E0012D2F4 /* UIManager.h */,
+				88392A9D309B010E0012D2F4 /* UIManager.m */,
+				881727101EAF56A100AB9B3C /* MesiboApplication.entitlements */,
+				3EA48FDA1E389A4900492966 /* Images */,
+				3EA48FA51E38998C00492966 /* Supporting Files */,
+			);
+			path = MesiboApplication;
+			sourceTree = "<group>";
+		};
+		3EA48FA51E38998C00492966 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3EA48FEC1E389AA700492966 /* Assets.xcassets */,
+				88B4F3281EBB61690032E9F2 /* mesibo-Regular.otf */,
+				3EA48FB61E38998C00492966 /* Info.plist */,
+				3EA48FA61E38998C00492966 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3EA48FDA1E389A4900492966 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				889963551E93BB7600FE21EB /* appicon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		88392A85309B010E0012D2F4 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		88392A99309B010E0012D2F4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				88392A95309B010E0012D2F4 /* AboutViewController.h */,
+				88392A96309B010E0012D2F4 /* AboutViewController.m */,
+				88392A97309B010E0012D2F4 /* SettingsViewController.h */,
+				88392A98309B010E0012D2F4 /* SettingsViewController.m */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3EA48FA11E38998C00492966 /* MesiboMessenger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EA48FCF1E38998D00492966 /* Build configuration list for PBXNativeTarget "MesiboMessenger" */;
+			buildPhases = (
+				3EA48F9E1E38998C00492966 /* Sources */,
+				3EA48F9F1E38998C00492966 /* Frameworks */,
+				3EA48FA01E38998C00492966 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MesiboMessenger;
+			packageProductDependencies = (
+				6D8C6E0626784A42ABA9AA46 /* mesibo */,
+				3AA57C77AADF4A0F889787F4 /* MesiboUI */,
+				57C93038D6A14623983B5CA8 /* MesiboCall */,
+				ECBFD95E8F3B4F9B81FECE68 /* MesiboUIHelper */,
+			);
+			productName = MesiboApplication;
+			productReference = 3EA48FA21E38998C00492966 /* MesiboMessenger.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3EA48F9A1E38998C00492966 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Mesibo;
+				TargetAttributes = {
+					3EA48FA11E38998C00492966 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = ZSLXDXHVW7;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 3EA48F9D1E38998C00492966 /* Build configuration list for PBXProject "MesiboMessenger" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				Base,
+			);
+			mainGroup = 3EA48F991E38998C00492966;
+			packageReferences = (
+				C0DE934715B04CBFB99546C1 /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */,
+			);
+			productRefGroup = 3EA48FA31E38998C00492966 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3EA48FA11E38998C00492966 /* MesiboMessenger */,
+			);
+		};
+/* End PBXProject section */
+
+
+/* Begin PBXResourcesBuildPhase section */
+		3EA48FA01E38998C00492966 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88B4F3291EBB617F0032E9F2 /* mesibo-Regular.otf in Resources */,
+				889963561E93BB7600FE21EB /* appicon.png in Resources */,
+				3EA490091E389AA700492966 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3EA48F9E1E38998C00492966 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88392A9E309B010E0012D2F4 /* UIManager.m in Sources */,
+				88392AA0309B010E0012D2F4 /* UIListener.m in Sources */,
+				88392AA1309B010E0012D2F4 /* BackupRestore.m in Sources */,
+				88392AA2309B010E0012D2F4 /* SampleAppListeners.m in Sources */,
+				88392AA3309B010E0012D2F4 /* SampleAPI.m in Sources */,
+				88392AA4309B010E0012D2F4 /* AppDelegate.m in Sources */,
+				88392AA6309B010E0012D2F4 /* AboutViewController.m in Sources */,
+				88392AA7309B010E0012D2F4 /* SettingsViewController.m in Sources */,
+				88392AA8309B010E0012D2F4 /* CallListeners.m in Sources */,
+				88392AA9309B010E0012D2F4 /* SampleAppFileTransferHandler.m in Sources */,
+				88392AAA309B010E0012D2F4 /* SampleAppNotify.m in Sources */,
+				3EA48FA71E38998C00492966 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3EA48FCD1E38998D00492966 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-v",
+					"-ObjC",
+				);
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3EA48FCE1E38998D00492966 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-v",
+					"-ObjC",
+				);
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3EA48FD01E38998D00492966 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MesiboApplication/MesiboApplication.entitlements;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = ZSLXDXHVW7;
+				ENABLE_BITCODE = NO;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = MesiboApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesibo.messenger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		3EA48FD11E38998D00492966 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MesiboApplication/MesiboApplication.entitlements;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = ZSLXDXHVW7;
+				ENABLE_BITCODE = NO;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = MesiboApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesibo.messenger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3EA48F9D1E38998C00492966 /* Build configuration list for PBXProject "MesiboMessenger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EA48FCD1E38998D00492966 /* Debug */,
+				3EA48FCE1E38998D00492966 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EA48FCF1E38998D00492966 /* Build configuration list for PBXNativeTarget "MesiboMessenger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EA48FD01E38998D00492966 /* Debug */,
+				3EA48FD11E38998D00492966 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+/* Begin XCRemoteSwiftPackageReference section */
+		C0DE934715B04CBFB99546C1 /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mesibo/mesibo-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6D8C6E0626784A42ABA9AA46 /* mesibo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0DE934715B04CBFB99546C1 /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */;
+			productName = mesibo;
+		};
+		3AA57C77AADF4A0F889787F4 /* MesiboUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0DE934715B04CBFB99546C1 /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */;
+			productName = MesiboUI;
+		};
+		57C93038D6A14623983B5CA8 /* MesiboCall */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0DE934715B04CBFB99546C1 /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */;
+			productName = MesiboCall;
+		};
+		ECBFD95E8F3B4F9B81FECE68 /* MesiboUIHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0DE934715B04CBFB99546C1 /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */;
+			productName = MesiboUIHelper;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3EA48F9A1E38998C00492966 /* Project object */;
+}
